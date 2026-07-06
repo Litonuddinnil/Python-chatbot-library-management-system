@@ -1,0 +1,34 @@
+# Secrets
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual env
+venv/
+.venv/
+
+# Logs
+*.log
+
+# AI / ML models (DO NOT PUSH)
+my-library-llm/
+*.safetensors
+*.bin
+*.pt
+
+# Vector DB / RAG
+faiss_index/
+vector_store/
+
+# Ollama (local)
+.ollama/
+
+# Temp files
+temp/
+tmp/
+
+# Editor
+.vscode/
+.idea/
