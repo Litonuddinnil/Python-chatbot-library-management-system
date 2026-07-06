@@ -1,15 +1,8 @@
---extra-index-url https://download.pytorch.org/whl/cpu
-torch
 fastapi
 uvicorn
 pymongo
 python-dotenv
 google-genai
 scikit-learn
-langchain
-langchain-community
-langchain-core
-langchain-huggingface
 rank-bm25
-faiss-cpu
-sentence-transformers
+requests

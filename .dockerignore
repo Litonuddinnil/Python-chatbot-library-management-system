@@ -1,0 +1,40 @@
+# flyctl launch added from .gitignore
+# Secrets
+**/.env
+
+# Python cache
+**/__pycache__
+**/*.pyc
+
+# Virtual env
+**/venv
+**/.venv
+
+# Logs
+**/*.log
+
+# AI / ML models (DO NOT PUSH)
+**/my-library-llm
+**/*.safetensors
+**/*.bin
+**/*.pt
+
+# Vector DB / RAG
+**/faiss_index
+**/vector_store
+
+# Ollama (local)
+**/.ollama
+
+# Temp files
+**/temp
+**/tmp
+
+# Editor
+**/.vscode
+**/.idea
+
+# flyctl launch added from venv/.gitignore
+# Created by venv; see https://docs.python.org/3/library/venv.html
+venv/**/*
+fly.toml

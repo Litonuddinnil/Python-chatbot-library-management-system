@@ -12,8 +12,14 @@ MONGODB_URI = os.getenv(
     "MONGODB_URI",
     "mongodb+srv://library-management:4reLpdGuZoUEQSpR@cluster0.jc89u.mongodb.net/?appName=Cluster0"
 )
+import os
 
-DB_NAME = "LibraryDB"
+MONGODB_URI = os.getenv("MONGODB_URI")
+if not MONGODB_URI:
+    raise RuntimeError("MONGODB_URI not set")
+
+DB_NAME = os.getenv("DB_NAME", "LibraryDB")
+
 BooksCollection = "books"
 UsersCollection = "users"
 NotificationsCollection = "notifications"

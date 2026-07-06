@@ -36,6 +36,9 @@ def is_small_talk(text: str) -> bool:
         "হাই", "হ্যালো", "কেমন আছো"
     }
     return text.lower().strip() in small_talk
+@app.get("/")
+def health():
+    return {"status": "ok"}
 
 @app.post("/chat")
 async def chat(req: ChatRequest):
@@ -63,7 +66,7 @@ async def chat(req: ChatRequest):
 
     #  Gemini (Primary) + Local Model (Fallback) jora lagaisi
     try:
-        print("⚡ Trying Gemini API (New google-genai SDK)...")
+        print(" Trying Gemini API (New google-genai SDK)...")
         
         prompt = (
             f"You are an expert library academic assistant. Use the following database context "
