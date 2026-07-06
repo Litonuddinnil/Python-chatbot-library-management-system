@@ -1,4 +1,3 @@
-# flyctl launch added from .gitignore
 # Secrets
 **/.env
 
@@ -34,7 +33,5 @@
 **/.vscode
 **/.idea
 
-# flyctl launch added from venv/.gitignore
-# Created by venv; see https://docs.python.org/3/library/venv.html
-venv/**/*
+.git/
 fly.toml
