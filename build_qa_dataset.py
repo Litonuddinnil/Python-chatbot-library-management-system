@@ -52,7 +52,7 @@ general_examples = [
     },
     {
         "question": "Boi return na korle fine koto?",
-        "context": "Overdue fine policy: A fine of 10 Taka per day is charged for each day a book is kept past its due date.",
+        "context": "Overdue fine policy: A fine of 10 Taka per week is charged for each day a book is kept past its due date.",
         "answer": "Boi return korar due date par hoye gele protidiner jonne 10 Taka kore fine/jorimana dite hobe."
     },
     {

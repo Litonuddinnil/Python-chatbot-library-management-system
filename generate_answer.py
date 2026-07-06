@@ -1,10 +1,8 @@
 import os
 import requests
 import json
-
-# =========================================================
-# CONFIG FOR BOTH TRANSFOMERS & OLLAMA MODES
-# =========================================================
+ 
+#config for both transformers & ollama modes
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -94,7 +92,7 @@ Question:
 Answer:
 """.strip()
 
-    # --- Mode 1: Ollama Mode (Recommended for lightweight local setup) ---
+    # --- Mode 1: Ollama Mode   ---
     if USE_OLLAMA:
         try:
             url = f"{OLLAMA_HOST}/api/generate"
