@@ -6,3 +6,9 @@ google-genai
 scikit-learn
 rank-bm25
 requests
+langchain
+langchain-community
+langchain-core
+langchain-huggingface
+faiss-cpu
+sentence-transformers
