@@ -1,3 +1,5 @@
+#import spaces  # must be imported before torch/sentence-transformers get loaded hugging face a deployment time 
+
 import os
 import logging
 import threading
@@ -89,7 +91,7 @@ def gather_all_library_knowledge() -> list:
                 )
 
                 docs.append(Document(
-                    page_content=content[:1200],  # 🔒 HARD TRUNCATION
+                    page_content=content[:1200],  #  HARD TRUNCATION
                     metadata={"category": "books", "title": title}
                 ))
         except Exception as e:
@@ -170,6 +172,7 @@ def _get_cached_index(top_k: int, force: bool = False):
 # ------------------------------------------------------------------
 # PUBLIC API
 # ------------------------------------------------------------------
+#@spaces.GPU  #hugging face a deployment time
 def retrieve_context(query: str, top_k: int = 4) -> str:
     """
     Academic-only RAG context.

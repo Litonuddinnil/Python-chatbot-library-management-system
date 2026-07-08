@@ -11,10 +11,10 @@ from main import app as fastapi_app, is_bengali, is_small_talk, client, ChatRequ
 from rag_retriever import retrieve_context
 from generate_answer import generate_answer
 
-# Define a function to process chat messages specifically for Gradio
+
 def gradio_chat_respond(message, history):
     """
-    Core response generation logic matching main.py but adapted for Gradio.
+    Core response generation logic.
     Returns:
         reply (str): The chatbot response.
         context (str): The retrieved database context.
@@ -111,117 +111,57 @@ def gradio_chat_respond(message, history):
         local_answer = generate_answer(user_msg, context)
         if not local_answer or "error" in local_answer.lower():
             if is_bengali(user_msg):
-                local_answer = "দুঃখিত, এই বিষয়টি নিয়ে এই মুহূর্তে কোনো তথ্য পাওয়া যায়নি। অনুগ্রহ করে অন্যভাবে চেষ্টা করুন।"
+                local_answer = "দুঃখিত, এই বিষয়টি নিয়ে এই মুহূর্তে কোনো তথ্য পাওয়া যায়নি। অনুগ্রহ করে অন্যভাবে চেষ্টা করুন।"
             else:
                 local_answer = "I apologize, but I could not find specific information for your query. Please let me know how else I can assist."
         return local_answer, context, "Local LLM / Ollama"
     except Exception as e:
         print(f"[Gradio] Local answer generation failed: {e}")
         fallback_msg = (
-            "দুঃখিত, এই মুহূর্তে নেটওয়ার্ক সমস্যার কারণে সাহায্য করতে পারছি না। অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন।"
+            "দুঃখিত, এই মুহূর্তে নেটওয়ার্ক সমস্যার কারণে সাহায্য করতে পারছি না। অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন।"
             if is_bengali(user_msg) else
             "I apologize, but I am currently having trouble retrieving that information. Please try asking again in a moment."
         )
         return fallback_msg, context, "Error Recovery Fallback"
 
-# Build the Gradio interface
-with gr.Blocks(title="Academic Library Assistant", theme=gr.themes.Soft(primary_hue="blue", secondary_hue="slate")) as demo:
-    gr.HTML(
-        """
-        <div style="text-align: center; margin-bottom: 20px; padding: 20px; background-color: #f0f7ff; border-radius: 12px; border: 1px solid #d0e3ff;">
-            <h1 style="color: #1e3a8a; margin: 0; font-size: 2.2rem; font-weight: 700;">📚 Academic Library Assistant</h1>
-            <p style="color: #4b5563; font-size: 1.1rem; margin-top: 8px;">
-                Ask questions about catalog search, library policies, textbooks, late fees, or study room bookings.
-            </p>
-            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 10px; font-size: 0.9rem; color: #1e40af;">
-                <span>⚡ Supports <b>DeepSeek API</b></span> | 
-                <span>✨ <b>Gemini API</b></span> | 
-                <span>🐳 <b>Local LLM / Ollama Fallback</b></span>
-            </div>
-        </div>
-        """
-    )
-    
-    with gr.Row():
-        with gr.Column(scale=3):
-            chatbot = gr.Chatbot(label="Library Chat History", height=500, show_copy_button=True)
-            msg_input = gr.Textbox(
-                label="Type your message here...",
-                placeholder="e.g., What are the library opening hours? / বই ধার নেওয়ার নিয়ম কি?",
-                lines=2,
-                max_lines=4
-            )
-            with gr.Row():
-                submit_btn = gr.Button("Send Message 🚀", variant="primary")
-                clear_btn = gr.ClearButton([chatbot, msg_input], value="Clear Chat 🗑️")
-            
-            # Example Prompts
-            gr.Examples(
-                examples=[
-                    "What are the library hours during exams?",
-                    "বই রিইস্যু করার নিয়ম কি?",
-                    "How much is the late fine for overdue books?",
-                    "How can I book a group study room?",
-                ],
-                inputs=msg_input,
-                label="Common Student Questions"
-            )
-            
-        with gr.Column(scale=2):
-            gr.Markdown("### 🔍 Intelligent RAG Assistant Details")
-            engine_box = gr.Textbox(
-                label="Active Model / Generation Engine",
-                interactive=False,
-                value="Waiting for your message..."
-            )
-            context_box = gr.Markdown(
-                label="Retrieved Knowledge Base Context",
-                value="*Knowledge retrieved from MongoDB vector store will appear here when you send a message.*"
-            )
 
-    # Chat submission handler
-    def handle_submit(message, chat_history):
-        if not message.strip():
-            return "", chat_history, "Waiting...", "Please enter a message."
-        
-        # Add user message to history
-        chat_history = chat_history + [[message, None]]
-        yield "", chat_history, "Generating response...", "*Fetching database context...*"
-        
-        # Get AI response
-        reply, context, source = gradio_chat_respond(message, chat_history)
-        
-        # Update chatbot response in history
-        chat_history[-1][1] = reply
-        
-        # Format the retrieved context nicely for the sidebar
-        formatted_context = f"**Source Context Used:**\n\n"
-        if context and context != "N/A (Small Talk)" and context != "Failed to fetch context.":
-            formatted_context += f"```text\n{context}\n```"
-        else:
-            formatted_context += f"*{context}*"
-            
-        yield "", chat_history, source, formatted_context
+# Minimal Gradio interface: just an input box and an output box
+def simple_chat(message):
+    reply, context, source = gradio_chat_respond(message, [])
+    return reply
 
-    # Register actions
-    submit_btn.click(
-        handle_submit, 
-        inputs=[msg_input, chatbot], 
-        outputs=[msg_input, chatbot, engine_box, context_box]
-    )
-    msg_input.submit(
-        handle_submit, 
-        inputs=[msg_input, chatbot], 
-        outputs=[msg_input, chatbot, engine_box, context_box]
-    )
 
-# Mount Gradio app into FastAPI
-# This allows the React Frontend to hit /api/chat or /chat, 
-# while Hugging Face and manual users get the beautiful Gradio Web UI at "/"!
-fastapi_app = gr.mount_gradio_app(fastapi_app, demo, path="/")
+demo = gr.Interface(
+    fn=simple_chat,
+    inputs=gr.Textbox(label="Question"),
+    outputs=gr.Textbox(label="Answer"),
+    title="Academic Library Assistant",
+)
+
+# ---------------------------------------------------------------------------
+# Plain JSON REST endpoint for the Node.js/React frontend.
+# ---------------------------------------------------------------------------
+@fastapi_app.post("/api/chat")
+def api(data: ChatRequest):
+    print("Received:", data.message)
+
+    reply, context, source = gradio_chat_respond(data.message, [])
+
+    print("Reply:", repr(reply))
+    print("Context:", repr(context))
+    print("Source:", repr(source))
+
+    return {
+        "reply": reply,
+        "context": context,
+        "engine": source
+    }
+
+
+demo.queue()
+fastapi_app = gr.mount_gradio_app(fastapi_app, demo, path="/", ssr_mode=False)
 
 if __name__ == "__main__":
-    # Standard HF Spaces port is 7860
     port = int(os.getenv("PORT", 7860))
     print(f"Starting server on port {port}...")
     uvicorn.run(fastapi_app, host="0.0.0.0", port=port)
