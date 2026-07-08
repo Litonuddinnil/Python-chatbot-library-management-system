@@ -8,10 +8,9 @@ load_dotenv()
 DeepSeek_Api_KEY = os.getenv("DeepSeek_Api_KEY", "YOUR_API_KEY_HERE")
 
 # MongoDB configuration matching your Express Cluster0 setup
-MONGODB_URI = os.getenv(
-    "MONGODB_URI",
-    "mongodb+srv://library-management:4reLpdGuZoUEQSpR@cluster0.jc89u.mongodb.net/?appName=Cluster0"
-)
+MONGODB_URI = os.getenv("MONGODB_URI", "")
+if not MONGODB_URI:
+    print("WARNING: MONGODB_URI is not set. Set it as a Space secret.")
 
 DB_NAME = os.getenv("DB_NAME", "LibraryDB")
 
