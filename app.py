@@ -1,3 +1,5 @@
+import spaces  # MUST be the very first import (before torch/sentence_transformers get loaded indirectly)
+
 import os
 import gradio as gr
 from fastapi import FastAPI
@@ -10,6 +12,17 @@ import requests as req_lib
 from main import app as fastapi_app, is_bengali, is_small_talk, client, ChatRequest
 from rag_retriever import retrieve_context
 from generate_answer import generate_answer
+
+
+@spaces.GPU(duration=1)
+def _warmup_gpu():
+    """
+    Dummy function required by Hugging Face ZeroGPU startup check.
+    This app doesn't actually need GPU compute (uses external APIs +
+    lightweight CPU sentence-transformers), but ZeroGPU hardware requires
+    at least one @spaces.GPU-decorated function to be detected at startup.
+    """
+    return True
 
 
 def gradio_chat_respond(message, history):
@@ -125,12 +138,12 @@ def gradio_chat_respond(message, history):
         return fallback_msg, context, "Error Recovery Fallback"
 
 
-# Minimal Gradio interface: just an input box and an output box
 def simple_chat(message):
     reply, context, source = gradio_chat_respond(message, [])
     return reply
 
 
+# Minimal Gradio interface: just an input box and an output box
 demo = gr.Interface(
     fn=simple_chat,
     inputs=gr.Textbox(label="Question"),
@@ -138,9 +151,10 @@ demo = gr.Interface(
     title="Academic Library Assistant",
 )
 
-# ---------------------------------------------------------------------------
-# Plain JSON REST endpoint for the Node.js/React frontend.
-# ---------------------------------------------------------------------------
+# Trigger GPU function detection at startup (required for ZeroGPU Spaces)
+_warmup_gpu()
+
+ 
 @fastapi_app.post("/api/chat")
 def api(data: ChatRequest):
     print("Received:", data.message)
@@ -158,10 +172,11 @@ def api(data: ChatRequest):
     }
 
 
+ 
 demo.queue()
 fastapi_app = gr.mount_gradio_app(fastapi_app, demo, path="/", ssr_mode=False)
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 7860))
-    print(f"Starting server on port {port}...")
+    print(f"Starting server on port {port}...") 
     uvicorn.run(fastapi_app, host="0.0.0.0", port=port)
