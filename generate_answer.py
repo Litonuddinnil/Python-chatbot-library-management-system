@@ -2,7 +2,7 @@ import os
 import requests
 import json
  
-#config for both transformers & ollama modes
+# Config for both transformers & ollama modes
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -66,22 +66,21 @@ def load_transformers_model():
 # =========================================================
 def generate_answer(question: str, context: str) -> str:
     """
-    Generates a safe academic answer using RAG context only.
+    Generates a safe academic answer.
     Supports local Ollama backend or PyTorch PEFT/Transformers.
     """
-    if not context or not context.strip():
-        return "Sorry, ei bishoye amar kache tottho nai."
-
-    prompt = f"""
-You are an academic library assistant.
+    if context and context.strip():
+        prompt = f"""
+You are a hybrid AI assistant built for an Academic Library.
+Provide accurate, concise, student-friendly answers.
 
 STRICT RULES:
-- Answer ONLY from the given context.
-- Do NOT guess or add extra information.
-- If the answer is not found in the context, say:
-  "Sorry, ei bishoye amar kache tottho nai."
-- Never show emails, links, IDs, or system metadata.
-- Keep the answer short and clear.
+- Use the following library database context to answer the question.
+- Prefer MongoDB learned data / retrieved context.
+- Responses must be JSX-safe plain text. No HTML or raw CSS.
+- Plain text only, line breaks allowed, NO emojis.
+- Bangla/Banglish input -> Bangla/Banglish output. English input -> English output.
+- Never mention API limits, quota, fallback, or internal errors.
 
 Context:
 {context}
@@ -91,8 +90,25 @@ Question:
 
 Answer:
 """.strip()
+    else:
+        prompt = f"""
+You are a hybrid AI assistant built for an Academic Library.
+Provide accurate, concise, student-friendly answers using your general knowledge since no specific database context was found.
 
-    # --- Mode 1: Ollama Mode   ---
+STRICT RULES:
+- Respond using general intelligence to help the student.
+- Responses must be JSX-safe plain text. No HTML or raw CSS.
+- Plain text only, line breaks allowed, NO emojis.
+- Bangla/Banglish input -> Bangla/Banglish output. English input -> English output.
+- Never mention API limits, quota, fallback, or internal errors.
+
+Question:
+{question}
+
+Answer:
+""".strip()
+
+    # --- Mode 1: Ollama Mode ---
     if USE_OLLAMA:
         try:
             url = f"{OLLAMA_HOST}/api/generate"
@@ -146,11 +162,11 @@ Answer:
             answer = decoded.strip()
 
         if not answer:
-            return "Sorry, ei bishoye amar kache tottho nai."
+            return "I apologize, but I couldn't find specific information for your query. Please let me know how else I can assist."
 
         return answer
 
     except Exception as e:
         print(f"Transformers PEFT generation failed: {e}")
-        # Universal fallback to make sure app never crashes
-        return "Sorry, connection error ba models load korte parini."
+        # Universal fallback to make sure app never crashes and behaves intelligently
+        return "I apologize, but I am currently having trouble retrieving that information. Please try asking again in a moment."

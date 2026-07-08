@@ -8,80 +8,78 @@ tags:
 - loss:MultipleNegativesRankingLoss
 base_model: sentence-transformers/all-MiniLM-L6-v2
 widget:
-- source_sentence: Search for the book computer networks
+- source_sentence: 'cloud computing: concepts, technology & architecture textbook
+    copy ache?'
   sentences:
-  - 'Book Title: structured programming language c programming. Author: . Department:
-    cse. Semester: 1st. Description: the c programming language by kernighan and ritchie
-    is the definitive reference for c programming. covers structured programming fundamentals,
-    pointers, arrays, functions, and file io used in cse foundation courses..'
-  - 'Book Title: computer networks. Author: . Department: cse. Semester: 5th. Description:
-    covers osi model, tcpip, data link layer, network layer, transport layer, application
-    layer protocols, network security, and wireless networks. comprehensive reference
-    for computer networking courses..'
-  - 'Book Title: cryptography and network security principles and practice. Author:
-    . Department: cse. Semester: 7th. Description: covers symmetric and asymmetric
-    encryption, des, aes, rsa, hash functions, digital signatures, ssltls, firewalls,
-    and intrusion detection systems. comprehensive reference for network security
-    courses..'
-- source_sentence: I need the textbook for digital logic and computer design
+  - 'Book Title: distributed systems: principles and paradigms. Author: . Department:
+    cse. Semester: 7th. Description: covers distributed system architectures, communication,
+    naming, synchronization, consistency and replication, fault tolerance, and distributed
+    file systems. comprehensive reference for distributed systems..'
+  - 'Book Title: cloud computing: concepts, technology & architecture. Author: . Department:
+    cse. Semester: 8th. Description: covers cloud computing fundamentals, virtualization,
+    cloud delivery models (iaas, paas, saas), cloud security, service level agreements,
+    and cloud-based infrastructure design patterns..'
+  - 'Book Title: numerical methods for engineers. Author: . Department: cse. Semester:
+    6th. Description: covers numerical solutions to equations, interpolation, numerical
+    differentiation and integration, ordinary and partial differential equations,
+    and linear systems. essential reference for numerical methods in cse..'
+- source_sentence: 'I want to read java: how to program (object oriented programming)'
   sentences:
-  - 'Book Title: pattern recognition and machine learning. Author: . Department: cse.
-    Semester: 7th. Description: covers bayesian decision theory, linear models, neural
-    networks, kernel methods, graphical models, mixture models, em algorithm, and
-    approximate inference. advanced reference for pattern recognition..'
-  - 'Book Title: machine learning. Author: . Department: cse. Semester: 7th. Description:
-    covers decision trees, neural networks, bayesian learning, instancebased learning,
-    genetic algorithms, reinforcement learning, and analytical learning. foundational
-    machine learning reference for cse students..'
-  - 'Book Title: digital logic and computer design. Author: . Department: cse. Semester:
-    2nd. Description: covers boolean algebra, logic gates, combinational circuits,
-    sequential circuits, registers, counters, and memory units. essential reference
-    for digital logic design course in cse programs..'
-- source_sentence: I want to know about digital logic and computer design
-  sentences:
-  - 'Book Title: digital logic and computer design. Author: . Department: cse. Semester:
-    2nd. Description: covers boolean algebra, logic gates, combinational circuits,
-    sequential circuits, registers, counters, and memory units. essential reference
-    for digital logic design course in cse programs..'
-  - 'Book Title: structured programming language c programming. Author: . Department:
-    cse. Semester: 1st. Description: the c programming language by kernighan and ritchie
-    is the definitive reference for c programming. covers structured programming fundamentals,
-    pointers, arrays, functions, and file io used in cse foundation courses..'
-  - 'Book Title: engineering mathematics ii. Author: . Department: cse. Semester:
-    2nd. Description: covers ordinary differential equations, laplace transforms,
-    fourier series, partial differential equations, and complex variable analysis.
-    continuation of engineering mathematics i for second semester cse students..'
-- source_sentence: probability and statistics for engineering and the sciences boi
-    ta ki library e ache?
-  sentences:
-  - 'Book Title: probability and statistics for engineering and the sciences. Author:
-    . Department: cse. Semester: 4th. Description: covers probability theory, random
-    variables, distributions, statistical inference, hypothesis testing, regression
-    analysis, and quality control. standard probability and statistics text for engineering
-    students..'
-  - 'Book Title: bangladesh studies. Author: . Department: cse. Semester: 2nd. Description:
-    covers the history of bangladesh, language movement, liberation war of 1971, constitutional
-    development, socioeconomic conditions, and professional ethics for undergraduate
-    engineering students..'
-  - 'Book Title: microprocessors and interfacing programming and hardware. Author:
-    . Department: cse. Semester: 5th. Description: covers 80868088 microprocessor
+  - 'Book Title: microprocessors and interfacing: programming and hardware. Author:
+    . Department: cse. Semester: 5th. Description: covers 8086/8088 microprocessor
     architecture, assembly language programming, interrupt handling, memory interfacing,
     and peripheral devices. standard reference for microprocessor courses in bangladeshi
     universities..'
-- source_sentence: I want to know about communicative english for undergraduate students
+  - 'Book Title: compilers: principles, techniques, and tools. Author: . Department:
+    cse. Semester: 6th. Description: the dragon book covers lexical analysis, parsing,
+    syntax-directed translation, intermediate code generation, code optimization,
+    and code generation. definitive reference for compiler design and construction..'
+  - 'Book Title: java: how to program (object oriented programming). Author: . Department:
+    cse. Semester: 3rd. Description: covers oop concepts including classes, objects,
+    inheritance, polymorphism, encapsulation, abstraction, interfaces, exception handling,
+    and generics using java. widely used reference for oop courses in bangladesh..'
+- source_sentence: Information about engineering mathematics i
   sentences:
-  - 'Book Title: machine learning. Author: . Department: cse. Semester: 7th. Description:
-    covers decision trees, neural networks, bayesian learning, instancebased learning,
-    genetic algorithms, reinforcement learning, and analytical learning. foundational
-    machine learning reference for cse students..'
-  - 'Book Title: pattern recognition and machine learning. Author: . Department: cse.
-    Semester: 7th. Description: covers bayesian decision theory, linear models, neural
-    networks, kernel methods, graphical models, mixture models, em algorithm, and
-    approximate inference. advanced reference for pattern recognition..'
-  - 'Book Title: communicative english for undergraduate students. Author: . Department:
-    cse. Semester: 1st. Description: communicative english textbook designed for undergraduate
-    engineering students in bangladesh. covers reading, writing, listening, and speaking
-    skills for academic and professional communication..'
+  - 'Book Title: engineering mathematics i. Author: . Department: cse. Semester: 1st.
+    Description: covers differential calculus, integral calculus, vector calculus,
+    matrix algebra, and coordinate geometry for engineering applications. standard
+    reference for first year cse mathematics..'
+  - 'Book Title: cloud computing: concepts, technology & architecture. Author: . Department:
+    cse. Semester: 8th. Description: covers cloud computing fundamentals, virtualization,
+    cloud delivery models (iaas, paas, saas), cloud security, service level agreements,
+    and cloud-based infrastructure design patterns..'
+  - 'Book Title: engineering mathematics i. Author: . Department: cse. Semester: 1st.
+    Description: covers differential calculus, integral calculus, vector calculus,
+    matrix algebra, and coordinate geometry for engineering applications. standard
+    reference for first year cse mathematics..'
+- source_sentence: 'Can I borrow java: how to program (object oriented programming)?'
+  sentences:
+  - 'Book Title: java: how to program (object oriented programming). Author: . Department:
+    cse. Semester: 3rd. Description: covers oop concepts including classes, objects,
+    inheritance, polymorphism, encapsulation, abstraction, interfaces, exception handling,
+    and generics using java. widely used reference for oop courses in bangladesh..'
+  - 'Book Title: bangladesh studies. Author: . Department: cse. Semester: 2nd. Description:
+    covers the history of bangladesh, language movement, liberation war of 1971, constitutional
+    development, socio-economic conditions, and professional ethics for undergraduate
+    engineering students..'
+  - 'Book Title: digital logic and computer design. Author: . Department: cse. Semester:
+    2nd. Description: covers boolean algebra, logic gates, combinational circuits,
+    sequential circuits, registers, counters, and memory units. essential reference
+    for digital logic design course in cse programs..'
+- source_sentence: Show me information about operating system concepts
+  sentences:
+  - 'Book Title: computer networks. Author: . Department: cse. Semester: 5th. Description:
+    covers osi model, tcp/ip, data link layer, network layer, transport layer, application
+    layer protocols, network security, and wireless networks. comprehensive reference
+    for computer networking courses..'
+  - 'Book Title: physics for scientists and engineers. Author: . Department: cse.
+    Semester: 1st. Description: covers mechanics, heat, thermodynamics, waves, and
+    optics. standard physics reference for first year cse students covering all foundational
+    topics required for engineering programs..'
+  - 'Book Title: operating system concepts. Author: . Department: cse. Semester: 5th.
+    Description: covers processes, threads, cpu scheduling, deadlocks, memory management,
+    virtual memory, file systems, i/o systems, and security. the dinosaur book is
+    the primary reference for operating systems courses worldwide..'
 pipeline_tag: sentence-similarity
 library_name: sentence-transformers
 ---
@@ -136,9 +134,9 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer("sentence_transformers_model_id")
 # Run inference
 sentences = [
-    'I want to know about communicative english for undergraduate students',
-    'Book Title: communicative english for undergraduate students. Author: . Department: cse. Semester: 1st. Description: communicative english textbook designed for undergraduate engineering students in bangladesh. covers reading, writing, listening, and speaking skills for academic and professional communication..',
-    'Book Title: machine learning. Author: . Department: cse. Semester: 7th. Description: covers decision trees, neural networks, bayesian learning, instancebased learning, genetic algorithms, reinforcement learning, and analytical learning. foundational machine learning reference for cse students..',
+    'Show me information about operating system concepts',
+    'Book Title: operating system concepts. Author: . Department: cse. Semester: 5th. Description: covers processes, threads, cpu scheduling, deadlocks, memory management, virtual memory, file systems, i/o systems, and security. the dinosaur book is the primary reference for operating systems courses worldwide..',
+    'Book Title: computer networks. Author: . Department: cse. Semester: 5th. Description: covers osi model, tcp/ip, data link layer, network layer, transport layer, application layer protocols, network security, and wireless networks. comprehensive reference for computer networking courses..',
 ]
 embeddings = model.encode(sentences)
 print(embeddings.shape)
@@ -147,9 +145,9 @@ print(embeddings.shape)
 # Get the similarity scores for the embeddings
 similarities = model.similarity(embeddings, embeddings)
 print(similarities)
-# tensor([[1.0000, 0.8952, 0.0274],
-#         [0.8952, 1.0000, 0.1012],
-#         [0.0274, 0.1012, 1.0000]])
+# tensor([[1.0000, 0.8706, 0.1631],
+#         [0.8706, 1.0000, 0.2524],
+#         [0.1631, 0.2524, 1.0000]])
 ```
 <!--
 ### Direct Usage (Transformers)
@@ -196,17 +194,17 @@ You can finetune this model on your own dataset.
 * Size: 795 training samples
 * Columns: <code>sentence_0</code> and <code>sentence_1</code>
 * Approximate statistics based on the first 100 samples:
-  |          | sentence_0                                                                        | sentence_1                                                                         |
-  |:---------|:----------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------|
-  | type     | string                                                                            | string                                                                             |
-  | modality | text                                                                              | text                                                                               |
-  | details  | <ul><li>min: 6 tokens</li><li>mean: 12.04 tokens</li><li>max: 24 tokens</li></ul> | <ul><li>min: 22 tokens</li><li>mean: 61.39 tokens</li><li>max: 73 tokens</li></ul> |
+  |          | sentence_0                                                                        | sentence_1                                                                        |
+  |:---------|:----------------------------------------------------------------------------------|:----------------------------------------------------------------------------------|
+  | type     | string                                                                            | string                                                                            |
+  | modality | text                                                                              | text                                                                              |
+  | details  | <ul><li>min: 6 tokens</li><li>mean: 12.26 tokens</li><li>max: 24 tokens</li></ul> | <ul><li>min: 22 tokens</li><li>mean: 59.7 tokens</li><li>max: 74 tokens</li></ul> |
 * Samples:
-  | sentence_0                                                                | sentence_1                                                                                                                                                                                                                                                                                                                                   |
-  |:--------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | <code>Query regarding distributed systems principles and paradigms</code> | <code>Book Title: distributed systems principles and paradigms. Author: . Department: cse. Semester: 7th. Description: covers distributed system architectures, communication, naming, synchronization, consistency and replication, fault tolerance, and distributed file systems. comprehensive reference for distributed systems..</code> |
-  | <code>Find software engineering in books list</code>                      | <code>Book Title: software engineering. Author: . Department: cse. Semester: 5th. Description: covers software development life cycle, requirements engineering, design patterns, uml, testing strategies, project management, and agile methodologies. the standard reference for software engineering courses..</code>                     |
-  | <code>Query regarding engineering mathematics i</code>                    | <code>Book Title: engineering mathematics i. Author: . Department: cse. Semester: 1st. Description: covers differential calculus, integral calculus, vector calculus, matrix algebra, and coordinate geometry for engineering applications. standard reference for first year cse mathematics..</code>                                       |
+  | sentence_0                                                          | sentence_1                                                                                                                                                                                                                                                                                                                        |
+  |:--------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | <code>I want to know about digital logic and computer design</code> | <code>Book Title: digital logic and computer design. Author: . Department: cse. Semester: 2nd. Description: covers boolean algebra, logic gates, combinational circuits, sequential circuits, registers, counters, and memory units. essential reference for digital logic design course in cse programs..</code>                 |
+  | <code>Operating System er lecture notes kothay?</code>              | <code>Lecture Notes Title: Operating System. Department: CSE. Semester: 5th. Topic Description: .</code>                                                                                                                                                                                                                          |
+  | <code>Where is the book operating system concepts located?</code>   | <code>Book Title: operating system concepts. Author: . Department: cse. Semester: 5th. Description: covers processes, threads, cpu scheduling, deadlocks, memory management, virtual memory, file systems, i/o systems, and security. the dinosaur book is the primary reference for operating systems courses worldwide..</code> |
 * Loss: [<code>MultipleNegativesRankingLoss</code>](https://sbert.net/docs/package_reference/sentence_transformer/losses.html#multiplenegativesrankingloss) with these parameters:
   ```json
   {
@@ -226,7 +224,7 @@ You can finetune this model on your own dataset.
 #### Non-Default Hyperparameters
 
 - `per_device_train_batch_size`: 16
-- `num_train_epochs`: 5
+- `num_train_epochs`: 10
 - `per_device_eval_batch_size`: 16
 - `multi_dataset_batch_sampler`: round_robin
 
@@ -234,7 +232,7 @@ You can finetune this model on your own dataset.
 <details><summary>Click to expand</summary>
 
 - `per_device_train_batch_size`: 16
-- `num_train_epochs`: 5
+- `num_train_epochs`: 10
 - `max_steps`: -1
 - `learning_rate`: 5e-05
 - `lr_scheduler_type`: linear
@@ -335,14 +333,20 @@ You can finetune this model on your own dataset.
 
 </details>
 
+### Training Logs
+| Epoch | Step | Training Loss |
+|:-----:|:----:|:-------------:|
+| 10.0  | 500  | 0.3086        |
+
+
 ### Training Time
-- **Training**: 4.8 minutes
+- **Training**: 18.2 minutes
 
 ### Framework Versions
 - Python: 3.13.5
 - Sentence Transformers: 5.6.0
 - Transformers: 5.13.0
-- PyTorch: 2.12.1+cpu
+- PyTorch: 2.8.0+cpu
 - Accelerate: 1.14.0
 - Datasets: 5.0.0
 - Tokenizers: 0.22.2

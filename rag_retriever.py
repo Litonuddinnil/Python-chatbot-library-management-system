@@ -1,10 +1,11 @@
+import os
 import logging
 import threading
 import time
 
 import config
 from database import get_collection
-from chatbot.preprocess import clean_text
+from preprocess import clean_text
 
 from langchain_core.documents import Document
 from langchain_community.retrievers import BM25Retriever
@@ -12,8 +13,6 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
 logger = logging.getLogger(__name__)
-
-import os
 
 # ✅ Safe loading of local or public embedding model
 model_path = "./my-library-embedding-model"
@@ -72,59 +71,68 @@ def gather_all_library_knowledge() -> list:
     # 1️⃣ BOOKS
     books_col = _safe_get_collection("BooksCollection")
     if books_col is not None:
-        for b in books_col.find({}, {"_id": 0}):
-            title = _clean(b.get("title", b.get("book_title", "")))
-            desc = _clean(b.get("longDescription", b.get("description", "")))
-            author = _clean(b.get("author_name", ""))
+        try:
+            for b in books_col.find({}, {"_id": 0}):
+                title = _clean(b.get("title", b.get("book_title", "")))
+                desc = _clean(b.get("longDescription", b.get("description", "")))
+                author = _clean(b.get("author_name", ""))
 
-            if not title or not desc:
-                continue
+                if not title or not desc:
+                    continue
 
-            content = (
-                f"Book Title: {title}. "
-                f"Author: {author}. "
-                f"Department: {_clean(b.get('department', ''))}. "
-                f"Semester: {b.get('semester', '')}. "
-                f"Description: {desc}."
-            )
+                content = (
+                    f"Book Title: {title}. "
+                    f"Author: {author}. "
+                    f"Department: {_clean(b.get('department', ''))}. "
+                    f"Semester: {b.get('semester', '')}. "
+                    f"Description: {desc}."
+                )
 
-            docs.append(Document(
-                page_content=content[:1200],  # 🔒 HARD TRUNCATION
-                metadata={"category": "books", "title": title}
-            ))
+                docs.append(Document(
+                    page_content=content[:1200],  # 🔒 HARD TRUNCATION
+                    metadata={"category": "books", "title": title}
+                ))
+        except Exception as e:
+            logger.error(f"Error reading books collection: {e}")
 
     # 2️⃣ FACULTY NOTES
     notes_col = _safe_get_collection("FacultyNotesCollection")
     if notes_col is not None:
-        for n in notes_col.find({}, {"_id": 0}):
-            title = _clean(n.get("title", ""))
-            if not title:
-                continue
+        try:
+            for n in notes_col.find({}, {"_id": 0}):
+                title = _clean(n.get("title", ""))
+                if not title:
+                    continue
 
-            content = (
-                f"Lecture Notes Title: {title}. "
-                f"Department: {_clean(n.get('department', ''))}. "
-                f"Semester: {_clean(n.get('semester', ''))}. "
-                f"Topic Description: {_clean(n.get('summary', ''))}."
-            )
+                content = (
+                    f"Lecture Notes Title: {title}. "
+                    f"Department: {_clean(n.get('department', ''))}. "
+                    f"Semester: {_clean(n.get('semester', ''))}. "
+                    f"Topic Description: {_clean(n.get('summary', ''))}."
+                )
 
-            docs.append(Document(
-                page_content=content[:1200],
-                metadata={"category": "faculty_notes", "title": title}
-            ))
+                docs.append(Document(
+                    page_content=content[:1200],
+                    metadata={"category": "faculty_notes", "title": title}
+                ))
+        except Exception as e:
+            logger.error(f"Error reading faculty notes: {e}")
 
     # 3️⃣ REVIEWS (OPTIONAL, SAFE)
     reviews_col = _safe_get_collection("reviewsCollection")
     if reviews_col is not None:
-        for r in reviews_col.find({}, {"_id": 0}):
-            comment = _clean(r.get("comment", ""))
-            if not comment:
-                continue
+        try:
+            for r in reviews_col.find({}, {"_id": 0}):
+                comment = _clean(r.get("comment", ""))
+                if not comment:
+                    continue
 
-            docs.append(Document(
-                page_content=f"Student feedback: {comment}",
-                metadata={"category": "reviews"}
-            ))
+                docs.append(Document(
+                    page_content=f"Student feedback: {comment}",
+                    metadata={"category": "reviews"}
+                ))
+        except Exception as e:
+            logger.error(f"Error reading reviews: {e}")
 
     logger.info("RAG docs loaded: %d", len(docs))
     return docs

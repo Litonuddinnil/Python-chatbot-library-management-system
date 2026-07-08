@@ -227,4 +227,3 @@ with open("qa_dataset.jsonl", "w", encoding="utf-8") as f:
         f.write(json.dumps({"prompt": prompt, "response": ex["answer"]}, ensure_ascii=False) + "\n")
 
 print(f"Generated {len(qa_examples)} QA examples to qa_dataset.jsonl")
-

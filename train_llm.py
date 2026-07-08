@@ -42,8 +42,15 @@ try:
 except Exception as e:
     err_msg = str(e).lower()
     is_gated_error = any(kw in err_msg for kw in ["gated", "401", "403", "unauthorized", "review", "forbidden"])
+    is_connection_error = any(kw in err_msg for kw in ["connection", "couldn't connect", "timeout", "offline", "unreachable"])
     
-    if is_gated_error and base_model_id != default_model:
+    if is_connection_error:
+        print("\n⚠️ Connection Error: Could not connect to Hugging Face to download the model.")
+        print("Please check your internet connection, proxy settings, or firewall.")
+        print("If you already downloaded the model previously, you can run in offline mode.")
+        print("Or make sure 'huggingface.co' is accessible from your network.")
+        exit(1)
+    elif is_gated_error and base_model_id != default_model:
         print(f"\n⚠️ Access denied/gated error for {base_model_id}: {e}")
         print(f"🔄 Automatically falling back to completely UNGATED SOTA model: '{default_model}'...")
         base_model_id = default_model
